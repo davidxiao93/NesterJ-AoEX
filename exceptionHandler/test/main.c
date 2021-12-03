@@ -51,18 +51,18 @@ int main(){
 
     initExceptionHandler();
     
-    pspDebugScreenPrintf("Press X for a breakpoint\n");
-    pspDebugScreenPrintf("Press O for a bus error\n");
+    pspDebugScreenPrintf("Press O for a breakpoint\n");
+    pspDebugScreenPrintf("Press X for a bus error\n");
 
     SceCtrlData pad;
     while(runningFlag){
         sceCtrlReadBufferPositive(&pad, 1);
-        if (pad.Buttons & PSP_CTRL_CROSS){
+        if (pad.Buttons & PSP_CTRL_CIRCLE){
 			/* Cause a break exception */
 			asm(
 				"break\r\n"
 			  );
-        }else if (pad.Buttons & PSP_CTRL_CIRCLE){
+        }else if (pad.Buttons & PSP_CTRL_CROSS){
 			/* Cause a bus error */
 			_sw(0, 0);
         }

@@ -22,7 +22,7 @@ void submenu_diskchange(void)
 {
 	enum
 	{
-		// ‡”Ô•ÏX‚·‚é‚ÆˆÙí“®ì‚·‚é‚Ì‚Å’ˆÓ
+		// ï¿½ï¿½ï¿½Ô•ÏXï¿½ï¿½ï¿½ï¿½ÆˆÙí“®ï¿½ì‚·ï¿½ï¿½Ì‚Å’ï¿½ï¿½ï¿½
 		CONFIG_EJECT = 0,
 		CONFIG_1STDISKSIDEA,
 		CONFIG_1STDISKSIDEB,
@@ -45,9 +45,9 @@ void submenu_diskchange(void)
 		}else if(new_pad & PSP_CTRL_AD_DOWN){
 			if(sel!=CONFIG_2NDDISKSIDEB)sel++;
 			else				sel=0;
-		}else if(new_pad & PSP_CTRL_CROSS){
-			break;
 		}else if(new_pad & PSP_CTRL_CIRCLE){
+			break;
+		}else if(new_pad & PSP_CTRL_CROSS){
 			if(sel==CONFIG_EJECT) {
 				PSPEMU_SetDiskSide(0x00);
 				break;
@@ -72,7 +72,7 @@ void submenu_diskchange(void)
 			else if(sel<=CONFIG_1STDISKSIDEA) sel=CONFIG_EJECT;
 		}
 
-		_strcpy(msg,"›FOK  ~FReturn to Main Menu");
+		_strcpy(msg, "X: OK  O: Return to Main Menu");
 
 		menu_frame(0, msg);
 
@@ -212,9 +212,9 @@ void submenu_preferencesconfig(void)
 		}else if(new_pad & PSP_CTRL_AD_DOWN){
 			if(sel!=CONFIG_END)sel++;
 			else				sel=0;
-		}else if(new_pad & PSP_CTRL_CROSS){
-			break;
 		}else if(new_pad & PSP_CTRL_CIRCLE){
+			break;
+		}else if(new_pad & PSP_CTRL_CROSS){
 			if(sel==CONFIG_USEROMDATABASE)
 				g_NESConfig.preferences.UseRomDataBase = g_NESConfig.preferences.UseRomDataBase ? FALSE: TRUE;
 			else if(sel==CONFIG_SKIPDISKACCESS)
@@ -239,7 +239,7 @@ void submenu_preferencesconfig(void)
 				ConvertThumbnailFile();
 		}
 
-		_strcpy(msg,"›FOK  ~FReturn to Main Menu");
+		_strcpy(msg,"X: OK  O: Return to Main Menu");
 
 		menu_frame(0, msg);
 
@@ -370,13 +370,13 @@ void submenu_rewindconfig(void)
 				sel++;
 			else
 				sel=0;
-		}else if(new_pad & PSP_CTRL_CROSS){
-			break;
 		}else if(new_pad & PSP_CTRL_CIRCLE){
+			break;
+		}else if(new_pad & PSP_CTRL_CROSS){
 			//no se hace nada
 		}
 
-		_strcpy(msg,"›FOK  ~FReturn to Main Menu");
+		_strcpy(msg,"X: OK  O: Return to Main Menu");
 
 		menu_frame(0, msg);
 
@@ -420,9 +420,9 @@ u32 MessageBox(char*pszMsg, u32 color, u32 ulTypes)
 		uint32 ulEnableBtn;
 	}MSGTYPE;
 	MSGTYPE stMsgType[] = {
-		{MB_OK, "›FOK", IDOK},
-		{MB_OKCANCEL, "›FOK  ~FCancel", IDOK | IDCANCEL},
-		{MB_YESNO, "›FYES  ~FNO", IDYES | IDNO}
+		{MB_OK, "X: OK", IDOK},
+		{MB_OKCANCEL, "X: OK  O: Cancel", IDOK | IDCANCEL},
+		{MB_YESNO, "X: YES  O: NO", IDYES | IDNO}
 	};
 
 	for (cbI = 0; cbI < (sizeof(stMsgType) /sizeof(MSGTYPE)); cbI++) {
@@ -456,10 +456,10 @@ u32 MessageBox(char*pszMsg, u32 color, u32 ulTypes)
 				bKeyReleased = TRUE;
 			}
 		}
-		if(new_pad & PSP_CTRL_CIRCLE){
+		if(new_pad & PSP_CTRL_CROSS){
 			if (ulEnableBtn & IDOK) return IDOK;
 		}
-		if(new_pad & PSP_CTRL_CROSS){
+		if(new_pad & PSP_CTRL_CIRCLE){
 			if (ulEnableBtn & IDCANCEL) return IDCANCEL;
 		}
 		pgWaitVn(1);
@@ -509,9 +509,9 @@ void submenu_graphicsconfig(void)
 		}else if(new_pad & PSP_CTRL_AD_DOWN){
 			if(sel!=CONFIG_WAITVBLANKSTART)sel++;
 			else				sel=0;
-		}else if(new_pad & PSP_CTRL_CROSS){
-			break;
 		}else if(new_pad & PSP_CTRL_CIRCLE){
+			break;
+		}else if(new_pad & PSP_CTRL_CROSS){
 			if(sel==CONFIG_EXTENDSPRITES)
 				g_NESConfig.graphics.show_more_than_8_sprites = g_NESConfig.graphics.show_more_than_8_sprites ? FALSE: TRUE;
 			else if(sel==CONFIG_BLACKANDWHITE)
@@ -532,7 +532,7 @@ void submenu_graphicsconfig(void)
 			else if(sel<=CONFIG_WAITVBLANKSTART) sel=CONFIG_EXTENDSPRITES;
 		}
 
-		_strcpy(msg,"›FOK  ~FReturn to Main Menu");
+		_strcpy(msg,"X: OK  O: Return to Main Menu");
 
 		menu_frame(0, msg);
 
@@ -631,9 +631,9 @@ void submenu_soundconfig(void)
 		}else if(new_pad & PSP_CTRL_AD_DOWN){
 			if(sel!=CONFIG_LAST)sel++;
 			else				sel=0;
-		}else if(new_pad & PSP_CTRL_CROSS){
-			break;
 		}else if(new_pad & PSP_CTRL_CIRCLE){
+			break;
+		}else if(new_pad & PSP_CTRL_CROSS){
 			if(sel==CONFIG_ENABLESOUND)
 				g_NESConfig.sound.enabled = g_NESConfig.sound.enabled ? FALSE: TRUE;
 			else if(sel==CONFIG_ENABLERECTANGLE1)
@@ -660,7 +660,7 @@ void submenu_soundconfig(void)
 			else if(sel<=CONFIG_SAMPLINGRATE) sel=CONFIG_ENABLESOUND;
 		}
 
-		_strcpy(msg,"›FOK  ~FReturn to Main Menu");
+		_strcpy(msg,"X: OK  O: Return to Main Menu");
 
 		menu_frame(0, msg);
 
@@ -702,7 +702,7 @@ void submenu_soundconfig(void)
 
 		pgScreenFlipV();
 	}
-	// •ÏX‚ª‚ ‚Á‚½‚Æ‚«‚¾‚¯XV
+	// ï¿½ÏXï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Xï¿½V
 	if (_memcmp(&sOld, &g_NESConfig, sizeof(NES_CONFIG))) {
 		PSPEMU_ApplySoundConfig();
 	}
@@ -745,7 +745,7 @@ void submenu_menucolorconfig(void)
 
 	for(;;){
 		readpad();
-		if(new_pad & PSP_CTRL_CIRCLE){
+		if(new_pad & PSP_CTRL_CROSS){
 			if(sel==EXIT){
 				break;
 			}else if(sel==INIT){
@@ -769,7 +769,7 @@ void submenu_menucolorconfig(void)
 					}
 				}
 			}else if(sel == BG_BRIGHT) {
-				//‹P“x•ÏX
+				//ï¿½Pï¿½xï¿½ÏX
 				setting.bgbright += 10;
 				if(setting.bgbright > 100) setting.bgbright=0;
 				if(g_bEnableBitmap){
@@ -780,9 +780,9 @@ void submenu_menucolorconfig(void)
 				if(color[sel/3][sel%3]<31)
 					color[sel/3][sel%3]++;
 			}
-		}else if(new_pad & PSP_CTRL_CROSS){
+		}else if(new_pad & PSP_CTRL_CIRCLE){
 			if(sel == BG_BRIGHT) {
-				//‹P“x•ÏX
+				//ï¿½Pï¿½xï¿½ÏX
 				setting.bgbright -= 10;
 				if(setting.bgbright < 0) setting.bgbright=100;
 				if(g_bEnableBitmap){
@@ -820,9 +820,9 @@ void submenu_menucolorconfig(void)
 		y = 5;
 
 		if(sel>=COLOR0_R && sel<=BG_BRIGHT)
-			_strcpy(msg, "›FAdd  ~FSub");
+			_strcpy(msg, "X: Add  O: Sub");
 		else
-			_strcpy(msg, "›FOK");
+			_strcpy(msg, "X: OK");
 
 		menu_frame(0, msg);
 
@@ -846,7 +846,7 @@ void submenu_menucolorconfig(void)
 			pgPrint(x,y++,setting.color[3],"  BG BRIGHT:100%");
 		else
 			pgPrint(x,y++,setting.color[3],"  BG BRIGHT:  0%");
-		if(setting.bgbright % 100 != 0)			// 10%`90%
+		if(setting.bgbright % 100 != 0)			// 10%ï¿½`90%
 			pgPutChar((x+13)*8,(y-1)*8,setting.color[3],0,'0'+setting.bgbright/10,1,0,1);
 		y++;
 		pgPrint(x,y++,setting.color[3],"  Return to Main Menu");
@@ -938,14 +938,14 @@ void submenu_keyconfig(void)
 				bPad++;
 		}else if(new_pad != 0){
 			if(sel==CONFIG_INIT) {
-				if (new_pad&PSP_CTRL_CIRCLE) {
+				if (new_pad&PSP_CTRL_CROSS) {
 					if (MessageBox("Are you sure to Initialize ?", RGB(255, 64, 64), MB_OKCANCEL) == IDOK) {
 						setkeydefault();
 					}
 				}
 			}
 			else if(sel==CONFIG_EXIT) {
-				if (new_pad&PSP_CTRL_CIRCLE) {
+				if (new_pad&PSP_CTRL_CROSS) {
 					break;
 				}
 			}
@@ -956,7 +956,7 @@ void submenu_keyconfig(void)
 		}
 
 		if(sel>=CONFIG_EXIT)
-			_strcpy(msg,"›FOK");
+			_strcpy(msg,"X: OK");
 		else
 			_strcpy(msg,"");
 
@@ -1065,16 +1065,16 @@ void submenu_keyconfig(void)
 
 void submenu_configcheat(void)
 {
-#define MAX_CHEAT_LINE (17) //×î´óÏÔÊ¾¼ÇÂ¼ÌõÊı
-#define MAX_LR_LINE (8)	//°´LR×î´óÌø¹ıĞĞÊı
-	//ĞÂ´úÂë
-	CHEATINFO *pCheatCurrent = g_NES.pCheatInfo;//Ö¸Ïòµ±Ç°×÷±×Âë
-	int iCount = 1;//¼ÆÊıÆ÷
-	int iSel = 0;//¹â±ê
-	CHEATINFO *pCheatShow = g_NES.pCheatInfo;//ÏÔÊ¾Ö¸Õë
+#define MAX_CHEAT_LINE (17) //ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½Â¼ï¿½ï¿½ï¿½ï¿½
+#define MAX_LR_LINE (8)	//ï¿½ï¿½LRï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	//ï¿½Â´ï¿½ï¿½ï¿½
+	CHEATINFO *pCheatCurrent = g_NES.pCheatInfo;//Ö¸ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	int iCount = 1;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	int iSel = 0;//ï¿½ï¿½ï¿½
+	CHEATINFO *pCheatShow = g_NES.pCheatInfo;//ï¿½ï¿½Ê¾Ö¸ï¿½ï¿½
 
-	uint8 cheat_num = NES_GetCheatCodeNum(); //×Ü¹²×÷±×ÂëÌõÄ¿
-	CHEATINFO *pCheatTemp = NULL;//ÁÙÊ±ÓÃ
+	uint8 cheat_num = NES_GetCheatCodeNum(); //ï¿½Ü¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¿
+	CHEATINFO *pCheatTemp = NULL;//ï¿½ï¿½Ê±ï¿½ï¿½
 	CHEATOPTION *pOptionShow;
 
 	char msg[256];
@@ -1092,8 +1092,8 @@ void submenu_configcheat(void)
 	{
 		readpad();
 
-		//¼ÆËãµ±Ç°Ñ¡ÔñµÄ×÷±×Âë
-		if(new_pad & PSP_CTRL_AD_UP)//ÉÏ
+		//ï¿½ï¿½ï¿½ãµ±Ç°Ñ¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		if(new_pad & PSP_CTRL_AD_UP)//ï¿½ï¿½
 		{
 			if(iCount!=1)
 			{
@@ -1108,7 +1108,7 @@ void submenu_configcheat(void)
 					pCheatShow = pCheatShow->pPrevious;
 			}
 		}
-		else if(new_pad & PSP_CTRL_AD_DOWN)//ÏÂ
+		else if(new_pad & PSP_CTRL_AD_DOWN)//ï¿½ï¿½
 		{
 			if(iCount<cheat_num)
 			{
@@ -1156,22 +1156,22 @@ void submenu_configcheat(void)
 			}
 		}
 
-		else if(new_pad & PSP_CTRL_AD_LEFT)//×ó
+		else if(new_pad & PSP_CTRL_AD_LEFT)//ï¿½ï¿½
 		{
 			if(pCheatCurrent->nCurrent)
 				pCheatCurrent->nCurrent-=1;
 		}
-		else if(new_pad & PSP_CTRL_AD_RIGHT)//¡ú
+		else if(new_pad & PSP_CTRL_AD_RIGHT)//ï¿½ï¿½
 		{
 			pCheatCurrent->nCurrent+=1;
 			if( pCheatCurrent->pOption[pCheatCurrent->nCurrent]==NULL )
 				pCheatCurrent->nCurrent-=1;
 		}
-		else if(new_pad & PSP_CTRL_CROSS)//X
+		else if(new_pad & PSP_CTRL_CIRCLE)//X
 		{
-			break;//·µ»Ø
-		}else if(new_pad & PSP_CTRL_CIRCLE)//Ô²È¦
-		{//ÆôÓÃ½ûÓÃ×÷±×Âë
+			break;//ï¿½ï¿½ï¿½ï¿½
+		}else if(new_pad & PSP_CTRL_CROSS)//Ô²È¦
+		{//ï¿½ï¿½ï¿½Ã½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			if(pCheatCurrent->nStatus)
 				pCheatCurrent->nStatus =0;
 			else
@@ -1186,7 +1186,7 @@ void submenu_configcheat(void)
 
 		y=3;
 
-		//ÏÔÊ¾×÷±×Âë±í
+		//ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		pCheatTemp = pCheatShow;
 		for(i=0; i<MAX_CHEAT_LINE; i++)
 		{
@@ -1196,9 +1196,9 @@ void submenu_configcheat(void)
 			_strcpy(msg,"   ");
 			_strcat(msg,pCheatTemp->szCheatName);
 			pgPrintGBK12(3,y++,setting.color[3],msg);
-			//ÏÔÊ¾×´Ì¬(¿ªÆô»òÕß¹Ø±Õ)+Ñ¡ÔñÏîÄ¿
+			//ï¿½ï¿½Ê¾×´Ì¬(ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß¹Ø±ï¿½)+Ñ¡ï¿½ï¿½ï¿½ï¿½Ä¿
 			if(pCheatTemp->nStatus==0)
-				pgPrintGBK12(40,y-1,setting.color[3],"¹Ø±Õ");
+				pgPrintGBK12(40,y-1,setting.color[3],"ï¿½Ø±ï¿½");
 			else
 			{
 				pOptionShow = pCheatTemp->pOption[pCheatTemp->nCurrent];
@@ -1209,10 +1209,10 @@ void submenu_configcheat(void)
 			pCheatTemp = pCheatTemp->pNext;
 		}
 
-		//ÏÔÊ¾×´Ì¬»òÕß×÷±×ÂëÏî
+		//ï¿½ï¿½Ê¾×´Ì¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 
-		//ÏÔÊ¾¹â±ê£¬´úÂëĞèÒª´¦Àí£¬cheat_num
+		//ï¿½ï¿½Ê¾ï¿½ï¿½ê£¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½cheat_num
 		y = iSel + 3;
 
 		if (nCursor/5) pgPutChar(24,y*12+2,setting.color[3],0,127,1,0,1);
@@ -1235,9 +1235,9 @@ u32 MessageBoxGbk12(char*pszMsg, u32 color, u32 ulTypes)
 		uint32 ulEnableBtn;
 	}MSGTYPE;
 	MSGTYPE stMsgType[] = {
-		{MB_OK, "¡ğ:È·¶¨", IDOK},
-		{MB_OKCANCEL, "¡ğ:È·¶¨  ¡Á:È¡Ïû", IDOK | IDCANCEL},
-		{MB_YESNO, "¡ğ:ÊÇ  ¡Á:·ñ", IDYES | IDNO}
+		{MB_OK, "X: OK", IDOK},
+		{MB_OKCANCEL, "X: OK  O: Cancel", IDOK | IDCANCEL},
+		{MB_YESNO, "X: YES  O: NO", IDYES | IDNO}
 	};
 
 	for (cbI = 0; cbI < (sizeof(stMsgType) /sizeof(MSGTYPE)); cbI++) {
@@ -1271,10 +1271,10 @@ u32 MessageBoxGbk12(char*pszMsg, u32 color, u32 ulTypes)
 				bKeyReleased = TRUE;
 			}
 		}
-		if(new_pad & PSP_CTRL_CIRCLE){
+		if(new_pad & PSP_CTRL_CROSS){
 			if (ulEnableBtn & IDOK) return IDOK;
 		}
-		if(new_pad & PSP_CTRL_CROSS){
+		if(new_pad & PSP_CTRL_CIRCLE){
 			if (ulEnableBtn & IDCANCEL) return IDCANCEL;
 		}
 		pgWaitVn(1);

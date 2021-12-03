@@ -50,12 +50,12 @@ void ExceptionHandler(PspDebugRegBlock * regs)
     for(i=0; i<32; i+=4) pspDebugScreenPrintf("%s:%08X %s:%08X %s:%08X %s:%08X\n", regName[i], (int)regs->r[i], regName[i+1], (int)regs->r[i+1], regName[i+2], (int)regs->r[i+2], regName[i+3], (int)regs->r[i+3]);
 
     sceKernelDelayThread(1000000);
-    pspDebugScreenPrintf("\n\nPress X to dump information on file exception.log and quit");
-    pspDebugScreenPrintf("\nPress O to quit");
+    pspDebugScreenPrintf("\n\nPress O to dump information on file exception.log and quit");
+    pspDebugScreenPrintf("\nPress X to quit");
 
     for (;;){
         sceCtrlReadBufferPositive(&pad, 1);
-        if (pad.Buttons & PSP_CTRL_CROSS){
+        if (pad.Buttons & PSP_CTRL_CIRCLE){
             FILE *log = fopen("exception.log", "w");
             if (log != NULL){
                 char testo[512];
@@ -78,7 +78,7 @@ void ExceptionHandler(PspDebugRegBlock * regs)
                 fclose(log);
             }
             break;
-        }else if (pad.Buttons & PSP_CTRL_CIRCLE){
+        }else if (pad.Buttons & PSP_CTRL_CROSS){
             break;
         }
 		sceKernelDelayThread(100000);

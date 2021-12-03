@@ -4,6 +4,8 @@
 #include "main.h"
 #include "fat.h"
 
+#define BOTTOM_MESSAGE "X: OK  O: Cancel, ^: Up"
+
 extern u32 new_pad;
 
 SceIoDirent files[MAX_ENTRY];
@@ -19,7 +21,7 @@ extern u32 MessageBox(char *pszMsg, u32 color, u32 ulTypes);
 extern void mh_printGBK12(int x,int y,const char *str,int col);
 
 ////////////////////////////////////////////////////////////////////////
-// ƒNƒCƒbƒNƒ\[ƒg
+// ï¿½Nï¿½Cï¿½bï¿½Nï¿½\ï¿½[ï¿½g
 void SJISCopyGBK(SceIoDirent *a, unsigned char *file)
 {
 	//unsigned char ca;
@@ -237,7 +239,7 @@ int getDirExGBK(const char *comppath, LPEXTENTIONS pExt)
 	for(i=0; i<MAX_ENTRY;i++)
 		_memset(szGbkFiles[i],0x00,256);
 
-	if(_strcmp(comppath,"ms0:/"))//ÅĞ¶ÏÊÇ·ñ¸ùÄ¿Â¼
+	if(_strcmp(comppath,"ms0:/"))//ï¿½Ğ¶ï¿½ï¿½Ç·ï¿½ï¿½Ä¿Â¼
 	{
 		_strcpy(files[nfiles].d_name,"..");
 		_strcpy(szGbkFiles[nfiles],"..");
@@ -249,7 +251,7 @@ int getDirExGBK(const char *comppath, LPEXTENTIONS pExt)
 
 	for(i = 0; i < count; i ++)
 	{
-			_memset(&files[nfiles], 0x00, sizeof(SceIoDirent));//Çå¿Õfiles[nfiles]
+			_memset(&files[nfiles], 0x00, sizeof(SceIoDirent));//ï¿½ï¿½ï¿½files[nfiles]
 
 			files[nfiles].d_stat.st_attr = info[i].attr;
 			//_strcpy(files[nfiles].d_name,info[i].filename);
@@ -262,17 +264,17 @@ int getDirExGBK(const char *comppath, LPEXTENTIONS pExt)
 			{
 				_memset(pszGbk,0x00,256);
 				Ucs2StringtoGbk((unsigned short*)info[i].longname,pszGbk);
-				_strcpy(szGbkFiles[nfiles],pszGbk);//ºóÃæÅÅĞòÎÄ¼ş£¬ËùÒÔÕâÑù×ö²»¶Ô
+				_strcpy(szGbkFiles[nfiles],pszGbk);//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			}
 			_strcpy(files[nfiles].d_name,info[i].filename);
 			//filename[256];longname[256];
 
 			if( nfiles<MAX_ENTRY)
 			{
-				if(files[nfiles].d_name[0] == '.')//¼ÌĞø
+				if(files[nfiles].d_name[0] == '.')//ï¿½ï¿½ï¿½ï¿½
 					continue;
 
-				if(files[nfiles].d_stat.st_attr == FAT_FILEATTR_DIRECTORY)//±£´æÄ¿Â¼
+				if(files[nfiles].d_stat.st_attr == FAT_FILEATTR_DIRECTORY)//ï¿½ï¿½ï¿½ï¿½Ä¿Â¼
 				{
 					_strcat(files[nfiles].d_name, "/");
 					_strcat(szGbkFiles[nfiles],"/");
@@ -280,8 +282,8 @@ int getDirExGBK(const char *comppath, LPEXTENTIONS pExt)
 					nfiles++;
 					continue;
 				}
-				sortfiles[nfiles] = files + nfiles;//±£´æÎÄ¼ş
-				if (pExt) //ÊÇ·ñÅĞ¶ÏÀ©Õ¹Ãû
+				sortfiles[nfiles] = files + nfiles;//ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½
+				if (pExt) //ï¿½Ç·ï¿½ï¿½Ğ¶ï¿½ï¿½ï¿½Õ¹ï¿½ï¿½
 				{
 					if(getExtId(files[nfiles].d_name, pExt) != EXT_UNKNOWN) nfiles++;
 				}
@@ -321,7 +323,7 @@ int getFilePathGBK(char *out, char *pszStartPath, LPEXTENTIONS pExt, char *pszSe
 	nfiles = getDirExGBK(path, pExt);
 
 	if (pszSelFile) {
-		// ˆê’v‚·‚éƒtƒ@ƒCƒ‹–¼‚ğ’T‚·
+		// ï¿½ï¿½vï¿½ï¿½ï¿½ï¿½tï¿½@ï¿½Cï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Tï¿½ï¿½
 		int nIndex;
 		for (nIndex = 0; nIndex < nfiles; nIndex++) {
 			if (!_strcmp(sortfiles[nIndex]->d_name, pszSelFile)) {
@@ -335,7 +337,7 @@ int getFilePathGBK(char *out, char *pszStartPath, LPEXTENTIONS pExt, char *pszSe
 		readpad();
 		if(new_pad)
 			bMsg=0;
-		if(new_pad & PSP_CTRL_CIRCLE){
+		if(new_pad & PSP_CTRL_CROSS){
 			if(sortfiles[sel]->d_stat.st_attr == FIO_SO_IFDIR){
 				if(!_strcmp(sortfiles[sel]->d_name,"..")){
 					up=1;
@@ -377,10 +379,10 @@ int getFilePathGBK(char *out, char *pszStartPath, LPEXTENTIONS pExt, char *pszSe
 					_strcat(delFile, sortfiles[sel]->d_name);
 					NES_DeleteFile(delFile);
 					nfiles = getDirExGBK(path, pExt);
-					sel=0;//É¾³ıÒÔºó
+					sel=0;//É¾ï¿½ï¿½ï¿½Ôºï¿½
 				}
 			}
-		}else if(new_pad & PSP_CTRL_CROSS){
+		}else if(new_pad & PSP_CTRL_CIRCLE){
 			return -1;
 		}else if(new_pad & PSP_CTRL_TRIANGLE){
 			up=1;
@@ -425,12 +427,12 @@ int getFilePathGBK(char *out, char *pszStartPath, LPEXTENTIONS pExt, char *pszSe
 
 
 		if(bMsg)
-			menu_frame(FilerMsg,"›FOK@~FCANCEL@¢FUP");
+			menu_frame(FilerMsg,BOTTOM_MESSAGE);
 		else
-			menu_frame(path,"›FOK@~FCANCEL@¢FUP");
+			menu_frame(path,BOTTOM_MESSAGE);
 
 
-		// ƒXƒNƒ[ƒ‹ƒo[
+		// ï¿½Xï¿½Nï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½oï¿½[
 		if(nfiles > rows){
 			h = 219;
 			pgDrawFrame(445,25,446,248,setting.color[1]);
@@ -516,7 +518,7 @@ int getFilePath(char *out, char *pszStartPath, LPEXTENTIONS pExt, char *pszSelFi
 	nfiles = getDir(path, pExt);
 
 	if (pszSelFile) {
-		// ˆê’v‚·‚éƒtƒ@ƒCƒ‹–¼‚ğ’T‚·
+		// ï¿½ï¿½vï¿½ï¿½ï¿½ï¿½tï¿½@ï¿½Cï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Tï¿½ï¿½
 		int nIndex;
 		for (nIndex = 0; nIndex < nfiles; nIndex++) {
 			if (!_strcmp(sortfiles[nIndex]->d_name, pszSelFile)) {
@@ -530,7 +532,7 @@ int getFilePath(char *out, char *pszStartPath, LPEXTENTIONS pExt, char *pszSelFi
 		readpad();
 		if(new_pad)
 			bMsg=0;
-		if(new_pad & PSP_CTRL_CIRCLE){
+		if(new_pad & PSP_CTRL_CROSS){
 			if(sortfiles[sel]->d_stat.st_attr == FIO_SO_IFDIR){
 				if(!_strcmp(sortfiles[sel]->d_name,"..")){
 					up=1;
@@ -546,7 +548,7 @@ int getFilePath(char *out, char *pszStartPath, LPEXTENTIONS pExt, char *pszSelFi
 				if (pszSelFile) _strcpy(pszSelFile,sortfiles[sel]->d_name);
 				return sel;
 			}
-		}else if(new_pad & PSP_CTRL_CROSS){
+		}else if(new_pad & PSP_CTRL_CIRCLE){
 			return -1;
 		}else if(new_pad & PSP_CTRL_TRIANGLE){
 			up=1;
@@ -590,11 +592,11 @@ int getFilePath(char *out, char *pszStartPath, LPEXTENTIONS pExt, char *pszSelFi
 		if(sel < top)			top=sel;
 
 		if(bMsg)
-			menu_frame(FilerMsg,"›FOK@~FCANCEL@¢FUP");
+			menu_frame(FilerMsg,BOTTOM_MESSAGE);
 		else
-			menu_frame(path,"›FOK@~FCANCEL@¢FUP");
+			menu_frame(path,BOTTOM_MESSAGE);
 
-		// ƒXƒNƒ[ƒ‹ƒo[
+		// ï¿½Xï¿½Nï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½oï¿½[
 		if(nfiles > rows){
 			h = 219;
 			pgDrawFrame(445,25,446,248,setting.color[1]);

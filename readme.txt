@@ -1,3 +1,10 @@
+This is a fork of NesterJ AoEX R3 with the single purpose to switch the confirm and cancel buttons to be CROSS and CIRCLE respectively because I'm European.
+There are no other changes in this fork.
+
+Original README below
+
+--------------------
+
 NesterJ AoEX R3
 2nd June 2012
 By ShimaFlareX
@@ -24,20 +31,20 @@ R2:
 
 R1:
 +Improved vsync speed a LOT.
-And I really mean it. There’s no noticeable speed difference when vsync is enabled now, while the original code took a 50% speed hit…
+And I really mean it. Thereï¿½s no noticeable speed difference when vsync is enabled now, while the original code took a 50% speed hitï¿½
 As result, VSync is now enabled by default.
 
-+Added new VSYNC option (SOMETIMES). This only synchronizes when there’s no frame drops occurring. I did this when I was still using the original Vsync code. As there’s no noticeable speed hit with vsync always on, this isn’t the default option.
++Added new VSYNC option (SOMETIMES). This only synchronizes when thereï¿½s no frame drops occurring. I did this when I was still using the original Vsync code. As thereï¿½s no noticeable speed hit with vsync always on, this isnï¿½t the default option.
 
 +Added a new option Battery Power Save. Default is ON.
 The original NesterJ code used a loop to determine when the next cycle should be emulated.
 Enabling this options attempts to sleep the thread when it`s still too early to execute the next cycle. 
 There shouldn't be any speed decrease with this, so you should always keep it enabled (unless you want to compare the CPU Usage using PSP-HUD or any similar plugin).
-I don’t know if ruka did the same thing I did on his latest version, as he didn’t distribute the source.
+I donï¿½t know if ruka did the same thing I did on his latest version, as he didnï¿½t distribute the source.
 
 Some test results:
 ROM:Pogo Cats (Public Domain)
-Screen Mode GPU 4:3, test taken on “PUSH START” screen. The FPS was always at NTSC maximum (60FPS).
+Screen Mode GPU 4:3, test taken on ï¿½PUSH STARTï¿½ screen. The FPS was always at NTSC maximum (60FPS).
 
 CPU @ 222Mhz:
 Battery Power Save Off: CPU Usage 80%
@@ -52,7 +59,7 @@ Battery Power Save On: CPU Usage 52%
 
 +Added new CPU Speed modes: 211Mhz and 200Mhz
 
--Removed Chinese language code: Whoever coded this duplicated the entire menu code changing all strings to Chinese. This results in a harder to maintain menu code (you need to change everything twice…). Also, bloated code is bloated.
+-Removed Chinese language code: Whoever coded this duplicated the entire menu code changing all strings to Chinese. This results in a harder to maintain menu code (you need to change everything twiceï¿½). Also, bloated code is bloated.
 
 
 Legal Stuff:

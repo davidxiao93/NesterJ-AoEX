@@ -59,7 +59,7 @@ void load_config(void)
 		unSizeOfSetting = sceIoRead(fd, &setting, sizeof(setting));
 		unSizeOfNESConfig = sceIoRead(fd, &g_NESConfig, sizeof(g_NESConfig));
 		sceIoClose(fd);
-		// ŠÈˆÕƒGƒ‰[ƒ`ƒFƒbƒN(setting)
+		// ï¿½ÈˆÕƒGï¿½ï¿½ï¿½[ï¿½`ï¿½Fï¿½bï¿½N(setting)
 		if (unSizeOfSetting != sizeof(setting)) goto SetDefault;
 		if(_strcmp(setting.vercnf, NESTERJ_CFG_TAG)) goto SetDefault;
 		if(setting.version != NESTERJ_CFG_FORMATVERSION) goto SetDefault;
@@ -69,7 +69,7 @@ void load_config(void)
 		if(setting.screenmode >= SCREEN_COUNT) goto SetDefault;
 		if(setting.samplingrate >= SAMPLINGRATE_COUNT) goto SetDefault;
 		if(setting.rapidmode >= RAPID_COUNT) goto SetDefault;
-		// –â‘è‚È‚µ
+		// ï¿½ï¿½ï¿½È‚ï¿½
 		if(setting.key_config[10]==0) setting.key_config[10] = PSP_CTRL_A_LEFT;
 		//>>>davex
 		if( setting.Reserved[0] > 360 || (setting.Reserved[0] % 5) != 0 ||
@@ -78,7 +78,7 @@ void load_config(void)
 		if( setting.Reserved[1] > 5000 || (setting.Reserved[1] % 5) != 0 ||
 			setting.Reserved[1] <= 0   ) setting.Reserved[1] = 50;
 		//<<<davex
-		// ŠÈˆÕƒGƒ‰[ƒ`ƒFƒbƒN(g_NESConfig)
+		// ï¿½ÈˆÕƒGï¿½ï¿½ï¿½[ï¿½`ï¿½Fï¿½bï¿½N(g_NESConfig)
 		if (unSizeOfNESConfig != sizeof(g_NESConfig)) goto SetDefault;
 		return;
 	}
@@ -153,7 +153,7 @@ void load_menu_bg()
 	char BgPath[MAX_PATH];
  	unsigned short x,y,yy,r,g,b,data;
 
-	// PNG ‘Î‰ž
+	// PNG ï¿½Î‰ï¿½
 	{
 		GetModulePath(BgPath, sizeof(BgPath));
 		_strcat(BgPath, "MENU.png");
@@ -191,7 +191,7 @@ void load_menu_bg()
 	}
 }
 
-// ”¼“§–¾ˆ—
+// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 unsigned short rgbTransp(unsigned short fgRGB, unsigned short bgRGB, int alpha) {
 
     unsigned short fgR, fgG, fgB;
@@ -274,16 +274,16 @@ void menu_frame(const char *msg0, const char *msg1)
 		pgBitBlt(0,0,480,272,1,g_bgBitmap);
 	else
 		pgFillvram(setting.color[0]);
-	//mh_print(314, 1, " ¡ NesterJ for PSP Ver1.12 ¡", setting.color[1]);
-	//mh_print(310, 1, " ¡ NesterJ for PSP Plus 0.5 ¡", setting.color[1]);
-	mh_print(250, 1, " ¡ (unnoficial) NesterJ for PSP AoEX R3 ¡", setting.color[1]);
+	//mh_print(314, 1, " ï¿½ï¿½ NesterJ for PSP Ver1.12 ï¿½ï¿½", setting.color[1]);
+	//mh_print(310, 1, " ï¿½ï¿½ NesterJ for PSP Plus 0.5 ï¿½ï¿½", setting.color[1]);
+	mh_print(250, 1, " ï¿½ï¿½ (unnoficial) NesterJ for PSP AoEX R3 ï¿½ï¿½", setting.color[1]);
 	GetBatteryInfoString(msg, &color);
 	mh_print(464-(_strlen(msg)*5), 254, msg, color);
-	// ƒƒbƒZ[ƒW‚È‚Ç
+	// ï¿½ï¿½ï¿½bï¿½Zï¿½[ï¿½Wï¿½È‚ï¿½
 	if(msg0!=0) mh_print(17, 12, msg0, setting.color[2]);
 	pgDrawFrame(17,23,463,250,setting.color[1]);
 	pgDrawFrame(18,24,462,249,setting.color[1]);
-	// ‘€ìà–¾
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	if(msg1!=0) mh_print(17, 254, msg1, setting.color[2]);
 }
 
@@ -300,7 +300,7 @@ struct SlotData {
 	uint16 thumbnail[112*128];
 } g_Slot[STATE_SLOT_MAX];
 
-// stateXV
+// stateï¿½Xï¿½V
 void update_stateslot(int nUpdateSlotNo)
 {
 	char path[MAXPATH], name[MAXNAME], tmp[8];
@@ -378,7 +378,7 @@ void update_stateslot(int nUpdateSlotNo)
 
 
 
-// ÅŒã‚É‘I‘ð‚µ‚½ƒtƒ@ƒCƒ‹‚ÌselˆÊ’u
+// ï¿½ÅŒï¿½É‘Iï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½tï¿½@ï¿½Cï¿½ï¿½ï¿½ï¿½selï¿½Ê’u
 int nSelRomFiler = 0, nSelGenieFiler = 0;
 
 boolean nesterj_menu(void)
@@ -419,7 +419,7 @@ boolean nesterj_menu(void)
 	for(;;){
 		readpad();
 		if (nNoKeyCount) {nNoKeyCount--; new_pad = 0;}
-		if(new_pad & PSP_CTRL_CIRCLE){
+		if(new_pad & PSP_CTRL_CROSS){
 			if(sel == SAVE_SLOT){
 				StateSlot++;
 				if(StateSlot >= STATE_SLOT_MAX) StateSlot=0;
@@ -566,7 +566,7 @@ boolean nesterj_menu(void)
 					rom_reload = 1;
 					f60count = 0;
 					//<<<
-					// ƒƒ€“Ç‚Ýž‚Ý
+					// ï¿½ï¿½ï¿½ï¿½ï¿½Ç‚Ýï¿½ï¿½ï¿½
 					if (NES_loadROM(RomPath)) {
 						break;
 					}else
@@ -574,7 +574,7 @@ boolean nesterj_menu(void)
 				}
 			}else if(sel == RESET){
 				if (MessageBox("Are you sure to RESET game ?", RGB(255, 0, 0), MB_OKCANCEL) == IDOK) {
-					// ƒŠƒZƒbƒg
+					// ï¿½ï¿½ï¿½Zï¿½bï¿½g
 					NES_reset(0);
 					break;
 				}
@@ -586,7 +586,7 @@ boolean nesterj_menu(void)
 					break;
 				}
 			}
-		}else if(new_pad & PSP_CTRL_CROSS){
+		}else if(new_pad & PSP_CTRL_CIRCLE){
 			break;
 		}else if(new_pad & PSP_CTRL_AD_LEFT){
 			if (sel >= SAVE_SLOT && sel <= STATE_DELETE) {
@@ -610,7 +610,7 @@ boolean nesterj_menu(void)
 			else			sel=0;
 		}
 
-		menu_frame(msg, "›FOK@~FCANCEL");
+		menu_frame(msg, "X: OK, O: Cancel");
 
 		if (sel == SCREEN_SHOT) {
 #define POS_X 206
@@ -629,7 +629,7 @@ boolean nesterj_menu(void)
 			}
 
 			if (g_Slot[StateSlot].AvailableThumbnail == UNCHECKED) {
-				// thumbnailŒÄ‚Ño‚µ
+				// thumbnailï¿½Ä‚Ñoï¿½ï¿½
 				char thumbnailPath[MAXPATH];
 				GetStatePath(thumbnailPath, sizeof(thumbnailPath));
 				_strcat(thumbnailPath, NES_ROM_GetRomName());
